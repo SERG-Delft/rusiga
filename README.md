@@ -46,11 +46,11 @@ The input parameter "chrom" represents an individual. It is a binary array. In o
         phenotype2 = chrom[100..199]
         phenotype2 = chrom[200..299]
         # calculate fitness
-        fitness = (penotype1 + phenotype2) / phenotype3
+        fitness = (phenotype1 + phenotype2) / phenotype3
         return fitness
     end
 
-A population with GA-parameters is created as follows:
+A population with GA-parameters is created as follows,
 
     # Rusiaga::Population.new(#_of_invids, 
     #                         chromosome_size, 
@@ -59,4 +59,10 @@ A population with GA-parameters is created as follows:
     #                         crossover_probab,
     #                         mutation_probab)  
     pop = Rusiga::Population.new(300, 240, :fitness_function, 4, 0.5, 0.001)
+    
+and the algorithm performs as so:
 
+    100.times do 
+        pop.generation()
+        Rusiga::PopulationOutput.screen(pop)
+    end
