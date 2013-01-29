@@ -21,7 +21,7 @@ Genetic algorithms are sophisticated search-/optimization techniques, loosely re
 Rusiga uses very rudimentary operators that are easy to implement. These are summarized in the following. Recombination is split up into two steps, selecting the individuals for recombination, and performing the actual recombination. 
 Both steps can be realized through distinct GA operators. In RuSiGA, two indivduals are selected for recombination based on tournament selection. This selects a number of individuals from the population randomly, and returns the fittest in this tournament. The number is determined by the tournament size. The actual recombination is done according to the uniform crossover operator. It determines for every crossover location (every bit in the chromosome) according to the crossover probability whether the value for the new individual (offspring) is taken from the first or from the second parent. If this probability is set to 0.5, the offspring will be comprised of approximately half of the traits from each parent.
 
-Most other GA-parameters depend on the complexity of the particular problem size to be solved. The population size should be set to a high value reflecting the complexity of the sampling in the search space. Tournament size should be set to a value that corresponds to the problem size as well. It is important to note that high tournament sizes lead to elitist selection, with a potential premature convergence of the search into a local optimum. Lower numbers result in lower selection pressure. RuSiGA maintains and evolves the fittest individuals found in the population. probability may be set to 0.5, mutation probability should be adjusted to a low value (e.g. 0.001).
+Most other GA-parameters depend on the complexity of the particular problem size to be solved. The population size should be set to a high value reflecting the complexity of the sampling in the search space. Tournament size should be set to a value that corresponds to the problem size as well. It is important to note that high tournament sizes lead to elitist selection, with a potential premature convergence of the search into a local optimum. Lower numbers result in lower selection pressure. RuSiGA maintains and evolves the fittest individuals found in the population (i.e. it solves maximization problems) probability may be set to 0.5, mutation probability should be adjusted to a low value (e.g. 0.001).
 
 
 Requirements
@@ -38,7 +38,17 @@ First, a fitness function should be defined. Rusiga is using this in order to ev
         ...
     end
   
-The input parameter "chrom" represents an individual. It is a binary array.
+The input parameter "chrom" represents an individual. It is a binary array. In order to being able to retrieve useful fitness values, the fitness function should first perform a so-called genotype-phenotype transfer and then do whatever is necessary to retrieve a fitness value, e.g.
+
+    def fitness_function(chrom)
+        # genotype-phenotype transfer
+        phenotype1 = chrom[0..99]
+        phenotype2 = chrom[100..199]
+        phenotype2 = chrom[200..299]
+        # calculate fitness
+        fitness = (penotype1 + phenotype2) / phenotype3
+        return fitness
+    end
 
 A population with GA-parameters is created as follows:
 
