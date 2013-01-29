@@ -50,7 +50,7 @@ The input parameter "chrom" represents an individual. It is a binary array. In o
         return fitness
     end
 
-A population with GA-parameters is created as follows,
+A population with GA-parameters is created ...
 
     # Rusiaga::Population.new(#_of_invids, 
     #                         chromosome_size, 
@@ -60,7 +60,7 @@ A population with GA-parameters is created as follows,
     #                         mutation_probab)  
     pop = Rusiga::Population.new(300, 240, :fitness_function, 4, 0.5, 0.001)
     
-and the algorithm performs as so:
+... and the algorithm executed.
 
     100.times do 
         pop.generation()
